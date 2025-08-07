@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FelixFight - Equipamento e Conhecimento para Guerreiros Modernos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Roboto+Condensed:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Estilos personalizados */
+        :root {
+            --primary-black: #000000;
+            --primary-red: #FF0000;
+            --dark-gray: #1A1A1A;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--dark-gray);
+            color: white;
+            scroll-behavior: smooth;
+        }
+        
+        .hero-section {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1547347298-4074fc3086f0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+            background-size: cover;
+            background-position: center;
+            min-height: 90vh;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(255, 0, 0, 0.2);
+        }
+        
+        .about-section {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('https://images.unsplash.com/photo-1517438322307-e67111335449?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: var(--primary-red);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .mobile-menu {
+            transition: all 0.3s ease;
+        }
+        
+        /* Animação para os cards de produtos */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-fadeInUp {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white">
+    <!-- Header/Navbar -->
+    <header class="fixed w-full bg-black/90 backdrop-blur-sm z-50 shadow-lg">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <!-- Logo -->
+            <div class="flex items-center">
+                <a href="#" class="flex items-center">
+                    <div class="w-10 h-10 bg-red-600 rounded-full flex items-center justify-center mr-2">
+                        <span class="font-bold text-xl">FF</span>
+                    </div>
+                    <span class="text-xl font-bold tracking-tighter">FELIX<span class="text-red-600">FIGHT</span></span>
+                </a>
+            </div>
+            
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex space-x-8">
+                <a href="#" class="nav-link font-medium hover:text-red-500 transition">Início</a>
+                <a href="#produtos" class="nav-link font-medium hover:text-red-500 transition">Produtos</a>
+                <a href="#aulas" class="nav-link font-medium hover:text-red-500 transition">Aulas</a>
+                <a href="#conteudos" class="nav-link font-medium hover:text-red-500 transition">Conteúdos</a>
+                <a href="#sobre" class="nav-link font-medium hover:text-red-500 transition">Sobre</a>
+                <a href="#contato" class="nav-link font-medium hover:text-red-500 transition">Contato</a>
+            </nav>
+            
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="mobile-menu hidden md:hidden bg-black/95 w-full py-4 px-4">
+            <div class="flex flex-col space-y-4">
+                <a href="#" class="block py-2 hover:text-red-500 transition">Início</a>
+                <a href="#produtos" class="block py-2 hover:text-red-500 transition">Produtos</a>
+                <a href="#aulas" class="block py-2 hover:text-red-500 transition">Aulas</a>
+                <a href="#conteudos" class="block py-2 hover:text-red-500 transition">Conteúdos</a>
+                <a href="#sobre" class="block py-2 hover:text-red-500 transition">Sobre</a>
+                <a href="#contato" class="block py-2 hover:text-red-500 transition">Contato</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section flex items-center pt-24">
+        <div class="container mx-auto px-4 py-20">
+            <div class="max-w-2xl">
+                <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+                    <span class="text-red-600">EQUIPAMENTO</span> E CONHECIMENTO PARA GUERREIROS MODERNOS
+                </h1>
+                <p class="text-xl md:text-2xl mb-8 text-gray-300">
+                    Produtos técnicos, aulas e conteúdos para todos os níveis
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="#produtos" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-8 rounded-full transition duration-300 transform hover:scale-105">
+                        Ver Produtos
+                    </a>
+                    <a href="#aulas" class="bg-transparent border-2 border-white hover:border-red-500 hover:text-red-500 text-white font-bold py-3 px-8 rounded-full transition duration-300 transform hover:scale-105">
+                        Explorar Aulas
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de Produtos -->
+    <section id="produtos" class="py-20 bg-gray-800">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">NOSSOS <span class="text-red-600">PRODUTOS</span></h2>
+                <div class="w-20 h-1 bg-red-600 mx-auto mb-6"></div>
+                <p class="max-w-2xl mx-auto text-gray-300">
+                    Equipamentos de alta qualidade projetados para atletas sérios. Durabilidade, desempenho e estilo em cada peça.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Produto 1 -->
+                <div class="product-card bg-gray-900 rounded-lg overflow-hidden shadow-lg transition duration-300 animate-fadeInUp" style="animation-delay: 0.1s;">
+                    <div class="relative overflow-hidden h-64">
+                        <img src="https://images.unsplash.com/photo-1586987177718-54e0887fec8e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80" 
+                             alt="Luvas de MMA" 
+                             class="w-full h-full object-cover transition duration-500 hover:scale-110"
+                             loading="lazy">
+                        <span class="absolute top-4 right-4 bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full">NOVO</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Luvas de MMA Profissionais</h3>
+                        <p class="text-gray-400 mb-4">Proteção premium para sparring e competição</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold">R$ 249,90</span>
+                            <a href="#" class="text-red-600 hover:text-red-400 font-medium flex items-center">
+                                Ver Produto <i class="fas fa-arrow-right ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Produto 2 -->
+                <div class="product-card bg-gray-900 rounded-lg overflow-hidden shadow-lg transition duration-300 animate-fadeInUp" style="animation-delay: 0.2s;">
+                    <div class="relative overflow-hidden h-64">
+                        <img src="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+                             alt="Rashguard Técnica" 
+                             class="w-full h-full object-cover transition duration-500 hover:scale-110"
+                             loading="lazy">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Rashguard Técnica</h3>
+                        <p class="text-gray-400 mb-4">Compressão e proteção para treinos intensos</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold">R$ 179,90</span>
+                            <a href="#" class="text-red-600 hover:text-red-400 font-medium flex items-center">
+                                Ver Produto <i class="fas fa-arrow-right ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Produto 3 -->
+                <div class="product-card bg-gray-900 rounded-lg overflow-hidden shadow-lg transition duration-300 animate-fadeInUp" style="animation-delay: 0.3s;">
+                    <div class="relative overflow-hidden h-64">
+                        <img src="https://images.unsplash.com/photo-1544463779-1d6b0b2040a7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+                             alt="Tatami Dobrável" 
+                             class="w-full h-full object-cover transition duration-500 hover:scale-110"
+                             loading="lazy">
+                        <span class="absolute top-4 right-4 bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full">OFERTA</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Tatami Dobrável Profissional</h3>
+                        <p class="text-gray-400 mb-4">Superfície segura para treinos em qualquer lugar</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold">R$ 899,90</span>
+                            <a href="#" class="text-red-600 hover:text-red-400 font-medium flex items-center">
+                                Ver Produto <i class="fas fa-arrow-right ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="#" class="inline-block bg-transparent border-2 border-red-600 hover:bg-red-600 text-white font-bold py-3 px-8 rounded-full transition duration-300">
+                    Ver Todos os Produtos
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de Aulas -->
+    <section id="aulas" class="py-20 bg-gray-900">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">NOSSAS <span class="text-red-600">AULAS</span></h2>
+                <div class="w-20 h-1 bg-red-600 mx-auto mb-6"></div>
+                <p class="max-w-2xl mx-auto text-gray-300">
+                    Treinos especializados ministrados por instrutores experientes. Presencial ou online, para todos os níveis.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Aula 1 -->
+                <div class="bg-gray-800 rounded-lg p-8 text-center hover:bg-gray-700 transition duration-300">
+                    <div class="w-20 h-20 bg-red-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-hands text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Jiu-Jitsu Brasileiro</h3>
+                    <p class="text-gray-400 mb-6">
+                        Domine a arte suave com técnicas de finalização, posições dominantes e estratégias de competição.
+                    </p>
+                    <a href="#" class="text-red-600 hover:text-red-400 font-medium">Ver Horários →</a>
+                </div>
+                
+                <!-- Aula 2 -->
+                <div class="bg-gray-800 rounded-lg p-8 text-center hover:bg-gray-700 transition duration-300">
+                    <div class="w-20 h-20 bg-red-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-fist-raised text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Boxe</h3>
+                    <p class="text-gray-400 mb-6">
+                        Desenvolva footwork preciso, combinações eficientes e poder de soco com treinamento científico.
+                    </p>
+                    <a href="#" class="text-red-600 hover:text-red-400 font-medium">Ver Horários →</a>
+                </div>
+                
+                <!-- Aula 3 -->
+                <div class="bg-gray-800 rounded-lg p-8 text-center hover:bg-gray-700 transition duration-300">
+                    <div class="w-20 h-20 bg-red-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-shoe-prints text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Muay Thai</h3>
+                    <p class="text-gray-400 mb-6">
+                        A arte das oito armas: socos, cotoveladas, joelhadas e chutes para um combate completo.
+                    </p>
+                    <a href="#" class="text-red-600 hover:text-red-400 font-medium">Ver Horários →</a>
+                </div>
+            </div>
+            
+            <div class="mt-12 bg-gray-800 rounded-lg p-8 md:p-12">
+                <div class="flex flex-col md:flex-row items-center">
+                    <div class="md:w-1/2 mb-8 md:mb-0 md:pr-8">
+                        <h3 class="text-2xl font-bold mb-4">AULAS <span class="text-red-600">PARTICULARES</span></h3>
+                        <p class="text-gray-300 mb-6">
+                            Treinamento personalizado com foco em suas necessidades específicas. Ideal para competidores ou quem busca evolução acelerada.
+                        </p>
+                        <ul class="space-y-3">
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-red-600 mr-3"></i>
+                                <span>Planejamento individualizado</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-red-600 mr-3"></i>
+                                <span>Análise de vídeo e correção técnica</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-red-600 mr-3"></i>
+                                <span>Preparação física específica</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="md:w-1/2">
+                        <div class="bg-gray-900 rounded-lg p-6">
+                            <h4 class="text-xl font-bold mb-4">AGENDE SUA AULA EXPERIMENTAL</h4>
+                            <form>
+                                <div class="mb-4">
+                                    <input type="text" placeholder="Seu Nome" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-red-600">
+                                </div>
+                                <div class="mb-4">
+                                    <input type="email" placeholder="Seu Email" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-red-600">
+                                </div>
+                                <div class="mb-4">
+                                    <select class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-red-600">
+                                        <option value="">Selecione a modalidade</option>
+                                        <option value="jiu-jitsu">Jiu-Jitsu</option>
+                                        <option value="boxe">Boxe</option>
+                                        <option value="muay-thai">Muay Thai</option>
+                                        <option value="personal">Personalizado</option>
+                                    </select>
+                                </div>
+                                <button type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-4 rounded-lg transition duration-300">
+                                    Agendar Aula
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de Conteúdos -->
+    <section id="conteudos" class="py-20 bg-gray-800">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">CONTEÚDOS <span class="text-red-600">EXCLUSIVOS</span></h2>
+                <div class="w-20 h-1 bg-red-600 mx-auto mb-6"></div>
+                <p class="max-w-2xl mx-auto text-gray-300">
+                    Artigos, vídeos e tutoriais para elevar seu conhecimento e performance nas artes marciais.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Conteúdo 1 -->
+                <div class="bg-gray-900 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition duration-300">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1517438476322-5d4f4d8a1c0a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80" 
+                             alt="Como escolher suas luvas" 
+                             class="w-full h-full object-cover transition duration-500 hover:scale-110"
+                             loading="lazy">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                        <span class="absolute bottom-4 left-4 bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full">GUIA</span>
+                    </div>
+                    <div class="p-6">
+                        <span class="text-sm text-gray-400">EQUIPAMENTOS</span>
+                        <h3 class="text-xl font-bold my-3">Como Escolher Suas Luvas de Boxe ou MMA</h3>
+                        <p class="text-gray-400 mb-4">
+                            Guia completo sobre tamanhos, pesos, materiais e quando trocar suas luvas para treino e competição.
+                        </p>
+                        <a href="#" class="text-red-600 hover:text-red-400 font-medium flex items-center">
+                            Ler Artigo <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Conteúdo 2 -->
+                <div class="bg-gray-900 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition duration-300">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1545205597-3d9d398c2152?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+                             alt="Nutrição para lutadores" 
+                             class="w-full h-full object-cover transition duration-500 hover:scale-110"
+                             loading="lazy">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                        <span class="absolute bottom-4 left-4 bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full">NUTRIÇÃO</span>
+                    </div>
+                    <div class="p-6">
+                        <span class="text-sm text-gray-400">DESEMPENHO</span>
+                        <h3 class="text-xl font-bold my-3">Nutrição para Lutadores: Alimentação Pré e Pós-Treino</h3>
+                        <p class="text-gray-400 mb-4">
+                            O que comer antes e depois dos treinos para maximizar energia, recuperação e resultados.
+                        </p>
+                        <a href="#" class="text-red-600 hover:text-red-400 font-medium flex items-center">
+                            Ler Artigo <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Conteúdo 3 -->
+                <div class="bg-gray-900 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition duration-300">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f5b565f8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+                             alt="Alongamento para grapplers" 
+                             class="w-full h-full object-cover transition duration-500 hover:scale-110"
+                             loading="lazy">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                        <span class="absolute bottom-4 left-4 bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full">TÉCNICA</span>
+                    </div>
+                    <div class="p-6">
+                        <span class="text-sm text-gray-400">MOBILIDADE</span>
+                        <h3 class="text-xl font-bold my-3">Alongamento para Grapplers: Rotina de 10 Minutos</h3>
+                        <p class="text-gray-400 mb-4">
+                            Sequência de alongamentos essenciais para prevenir lesões e melhorar mobilidade no Jiu-Jitsu.
+                        </p>
+                        <a href="#" class="text-red-600 hover:text-red-400 font-medium flex items-center">
+                            Assistir Vídeo <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="#" class="inline-block bg-transparent border-2 border-red-600 hover:bg-red-600 text-white font-bold py-3 px-8 rounded-full transition duration-300">
+                    Ver Todos os Conteúdos
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Sobre -->
+    <section id="sobre" class="about-section py-20">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">SOBRE A <span class="text-red-600">FELIXFIGHT</span></h2>
+                    <div class="w-20 h-1 bg-red-600 mx-auto mb-6"></div>
+                </div>
+                
+                <div class="bg-black/70 backdrop-blur-sm rounded-lg p-8 md:p-12">
+                    <p class="text-lg mb-6">
+                        A <span class="text-red-600 font-bold">FelixFight</span> é uma marca dedicada às artes marciais, com o objetivo de promover o desporto e oferecer produtos de alta qualidade para atletas, praticantes e entusiastas.
+                    </p>
+                    <p class="text-lg mb-6">
+                        Comercializamos equipamentos de treino, vestuário técnico, merchandise exclusivo e oferecemos acesso a aulas especializadas e conteúdos educativos para todos os níveis de experiência.
+                    </p>
+                    <p class="text-lg">
+                        Nossa missão é fornecer ferramentas e conhecimento para que cada praticante possa alcançar seu máximo potencial, seja como hobby, condicionamento físico ou competição profissional.
+                    </p>
+                    
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12">
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-red-600 mb-2">10+</div>
+                            <div class="text-sm uppercase tracking-wider">Anos no Mercado</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-red-600 mb-2">500+</div>
+                            <div class="text-sm uppercase tracking-wider">Produtos</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-red-600 mb-2">20+</div>
+                            <div class="text-sm uppercase tracking-wider">Instrutores</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-red-600 mb-2">10K+</div>
+                            <div class="text-sm uppercase tracking-wider">Alunos</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de Contato -->
+    <section id="contato" class="py-20 bg-gray-900">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">ENTRE EM <span class="text-red-600">CONTATO</span></h2>
+                    <div class="w-20 h-1 bg-red-600 mx-auto mb-6"></div>
+                    <p class="max-w-2xl mx-auto text-gray-300">
+                        Tem dúvidas, sugestões ou quer saber mais sobre nossos produtos e serviços? Envie uma mensagem!
+                    </p>
+                </div>
+                
+                <div class="bg-gray-800 rounded-lg p-8 md:p-12">
+                    <form id="contact-form">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="name" class="block text-sm font-medium mb-2">Seu Nome</label>
+                                <input type="text" id="name" name="name" required 
+                                       class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-red-600">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-medium mb-2">Seu Email</label>
+                                <input type="email" id="email" name="email" required 
+                                       class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-red-600">
+                            </div>
+                        </div>
+                        <div class="mt-6">
+                            <label for="subject" class="block text-sm font-medium mb-2">Assunto</label>
+                            <input type="text" id="subject" name="subject" required 
+                                   class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-red-600">
+                        </div>
+                        <div class="mt-6">
+                            <label for="message" class="block text-sm font-medium mb-2">Sua Mensagem</label>
+                            <textarea id="message" name="message" rows="5" required 
+                                      class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-red-600"></textarea>
+                        </div>
+                        <div class="mt-8">
+                            <button type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-4 px-6 rounded-lg transition duration-300">
+                                Enviar Mensagem
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="py-16 bg-black">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto text-center">
+                <h3 class="text-2xl font-bold mb-4">CADASTRE-SE PARA RECEBER NOVIDADES</h3>
+                <p class="text-gray-400 mb-8">
+                    Receba ofertas exclusivas, lançamentos de produtos e conteúdos gratuitos diretamente no seu email.
+                </p>
+                <form class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+                    <input type="email" placeholder="Seu melhor email" 
+                           class="flex-grow bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-red-600">
+                    <button type="submit" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-lg transition duration-300 whitespace-nowrap">
+                        Assinar Newsletter
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 pt-16 pb-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                <div>
+                    <div class="flex items-center mb-6">
+                        <div class="w-10 h-10 bg-red-600 rounded-full flex items-center justify-center mr-2">
+                            <span class="font-bold text-xl">FF</span>
+                        </div>
+                        <span class="text-xl font-bold tracking-tighter">FELIX<span class="text-red-600">FIGHT</span></span>
+                    </div>
+                    <p class="text-gray-400 mb-4">
+                        Equipamento e conhecimento para guerreiros modernos.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-red-500 transition">
+                            <i class="fab fa-instagram text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-red-500 transition">
+                            <i class="fab fa-youtube text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-red-500 transition">
+                            <i class="fab fa-tiktok text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-red-500 transition">
+                            <i class="fab fa-facebook text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-6">LINKS RÁPIDOS</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-red-500 transition">Início</a></li>
+                        <li><a href="#produtos" class="text-gray-400 hover:text-red-500 transition">Produtos</a></li>
+                        <li><a href="#aulas" class="text-gray-400 hover:text-red-500 transition">Aulas</a></li>
+                        <li><a href="#conteudos" class="text-gray-400 hover:text-red-500 transition">Conteúdos</a></li>
+                        <li><a href="#sobre" class="text-gray-400 hover:text-red-500 transition">Sobre Nós</a></li>
+                        <li><a href="#contato" class="text-gray-400 hover:text-red-500 transition">Contato</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-6">PRODUTOS</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-red-500 transition">Luvas</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-red-500 transition">Rashguards</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-red-500 transition">Shorts</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-red-500 transition">Tatamis</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-red-500 transition">Acessórios</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-red-500 transition">Merchandise</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-6">CONTATO</h4>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt text-red-600 mt-1 mr-3"></i>
+                            <span class="text-gray-400">Rua do Combate, 123<br>São Paulo - SP</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt text-red-600 mr-3"></i>
+                            <span class="text-gray-400">(11) 98765-4321</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope text-red-600 mr-3"></i>
+                            <span class="text-gray-400">contato@felixfight.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-500 text-sm mb-4 md:mb-0">
+                        © 2025 FelixFight. Todos os direitos reservados.
+                    </p>
+                    <div class="flex space-x-6">
+                        <a href="#" class="text-gray-500 hover:text-red-500 text-sm transition">Termos de Serviço</a>
+                        <a href="#" class="text-gray-500 hover:text-red-500 text-sm transition">Política de Privacidade</a>
+                        <a href="#" class="text-gray-500 hover:text-red-500 text-sm transition">FAQ</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Botão Voltar ao Topo -->
+    <button id="back-to-top" class="fixed bottom-8 right-8 bg-red-600 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg opacity-0 invisible transition-all duration-300">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // Menu mobile
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Validação do formulário de contato
+        const contactForm = document.getElementById('contact-form');
+        
+        if (contactForm) {
+            contactForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                // Validação simples
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const subject = document.getElementById('subject').value;
+                const message = document.getElementById('message').value;
+                
+                if (!name || !email || !subject || !message) {
+                    alert('Por favor, preencha todos os campos.');
+                    return;
+                }
+                
+                // Simulação de envio
+                alert('Mensagem enviada com sucesso! Entraremos em contato em breve.');
+                contactForm.reset();
+            });
+        }
+        
+        // Botão voltar ao topo
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.remove('opacity-0', 'invisible');
+                backToTopButton.classList.add('opacity-100', 'visible');
+            } else {
+                backToTopButton.classList.remove('opacity-100', 'visible');
+                backToTopButton.classList.add('opacity-0', 'invisible');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Suavizar rolagem para links internos
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    // Fechar menu mobile se aberto
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                    
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Animação dos elementos ao rolar
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.animate-fadeInUp');
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.2;
+                
+                if (elementPosition < screenPosition) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        };
+        
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
+    </script>
+</body>
+</html>
