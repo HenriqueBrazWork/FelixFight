@@ -1,714 +1,307 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FelixFight - Equipamento e Conhecimento para Guerreiros Modernos</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Roboto+Condensed:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        /* Estilos personalizados */
-        :root {
-            --primary-black: #000000;
-            --primary-red: #FF0000;
-            --dark-gray: #1A1A1A;
-        }
-        
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background-color: var(--dark-gray);
-            color: white;
-            scroll-behavior: smooth;
-        }
-        
-        .hero-section {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1547347298-4074fc3086f0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
-            background-size: cover;
-            background-position: center;
-            min-height: 90vh;
-        }
-        
-        .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(255, 0, 0, 0.2);
-        }
-        
-        .about-section {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('https://images.unsplash.com/photo-1517438322307-e67111335449?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-        }
-        
-        .nav-link {
-            position: relative;
-        }
-        
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -2px;
-            left: 0;
-            background-color: var(--primary-red);
-            transition: width 0.3s ease;
-        }
-        
-        .nav-link:hover::after {
-            width: 100%;
-        }
-        
-        .mobile-menu {
-            transition: all 0.3s ease;
-        }
-        
-        /* Animação para os cards de produtos */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .animate-fadeInUp {
-            animation: fadeInUp 0.6s ease forwards;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FelixFight — Equipamento e Treino de Artes Marciais</title>
+<meta name="description" content="FelixFight: equipamento, kimonos, luvas e aulas de artes marciais. Produtos e serviços para quem treina a sério.">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          ink:     '#0D0D0F',
+          ink2:    '#17171A',
+          tatami:  '#EDE7DA',
+          crimson: '#C81E3A',
+          gold:    '#C9A24B',
+        },
+        fontFamily: {
+          display: ['"Bebas Neue"', 'sans-serif'],
+          sans: ['Inter', 'sans-serif'],
+        },
+      }
+    }
+  }
+</script>
+
+<style>
+  body { background:#0D0D0F; color:#EDE7DA; font-family:'Inter',sans-serif; }
+  h1,h2,h3,h4,.font-display { font-family:'Bebas Neue',sans-serif; letter-spacing:.03em; }
+
+  .eyebrow {
+    font-family:'Bebas Neue',sans-serif; letter-spacing:.3em; font-size:.85rem;
+    color:#C9A24B;
+  }
+
+  /* Belt-stripe signature */
+  .belt { position:relative; height:14px; background:#0D0D0F; overflow:hidden; }
+  .belt::before {
+    content:''; position:absolute; inset:0;
+    background: repeating-linear-gradient(90deg, #C81E3A 0 46px, transparent 46px 52px);
+  }
+  .belt.gold::before {
+    background: repeating-linear-gradient(90deg, #C9A24B 0 46px, transparent 46px 52px);
+  }
+
+  .tatami-field { position:absolute; inset:0; overflow:hidden; pointer-events:none; opacity:.35; }
+  .tatami-field svg { width:100%; height:100%; }
+
+  @keyframes strike { 0%{opacity:0; transform:translateX(-14px);} 100%{opacity:1; transform:translateX(0);} }
+  .strike-in { animation: strike .7s cubic-bezier(.2,.8,.2,1) forwards; }
+  .strike-in.d1 { animation-delay:.15s; opacity:0; }
+  .strike-in.d2 { animation-delay:.3s; opacity:0; }
+
+  .nav-link { position:relative; }
+  .nav-link::after {
+    content:''; position:absolute; left:0; bottom:-4px; width:0; height:2px;
+    background:#C81E3A; transition:width .25s ease;
+  }
+  .nav-link:hover::after { width:100%; }
+
+  .card-hover { transition: transform .25s ease, border-color .25s ease; }
+  .card-hover:hover { transform: translateY(-4px); border-color:#C9A24B66; }
+
+  .soon-card { background:#17171A; border:1px solid rgba(201,162,75,.25); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .strike-in { animation:none !important; opacity:1 !important; }
+  }
+</style>
 </head>
-<body class="bg-gray-900 text-white">
-    <!-- Header/Navbar -->
-    <header class="fixed w-full bg-black/90 backdrop-blur-sm z-50 shadow-lg">
-        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-             <!-- Logo -->
-        <div class="flex items-center">
-            <a href="#" class="flex items-center">
-                <img src="https://github.com/HenriqueBrazWork/FelixFight/logos/Logo1.png" alt="FelixFight Logo" class="w-12 h-12 mr-2 rounded-full">
-                <span class="text-xl font-bold tracking-tighter">FELIX<span class="text-red-600">FIGHT</span></span>
-            </a>
-        </div>
-            <!-- Desktop Navigation -->
-            <nav class="hidden md:flex space-x-8">
-                <a href="#" class="nav-link font-medium hover:text-red-500 transition">Início</a>
-                <a href="#produtos" class="nav-link font-medium hover:text-red-500 transition">Produtos</a>
-                <a href="#aulas" class="nav-link font-medium hover:text-red-500 transition">Aulas</a>
-                <a href="#conteudos" class="nav-link font-medium hover:text-red-500 transition">Conteúdos</a>
-                <a href="#sobre" class="nav-link font-medium hover:text-red-500 transition">Sobre</a>
-                <a href="#contato" class="nav-link font-medium hover:text-red-500 transition">Contato</a>
-            </nav>
-            
-            <!-- Mobile Menu Button -->
-            <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none">
-                <i class="fas fa-bars text-2xl"></i>
-            </button>
-        </div>
-        
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="mobile-menu hidden md:hidden bg-black/95 w-full py-4 px-4">
-            <div class="flex flex-col space-y-4">
-                <a href="#" class="block py-2 hover:text-red-500 transition">Início</a>
-                <a href="#produtos" class="block py-2 hover:text-red-500 transition">Produtos</a>
-                <a href="#aulas" class="block py-2 hover:text-red-500 transition">Aulas</a>
-                <a href="#conteudos" class="block py-2 hover:text-red-500 transition">Conteúdos</a>
-                <a href="#sobre" class="block py-2 hover:text-red-500 transition">Sobre</a>
-                <a href="#contato" class="block py-2 hover:text-red-500 transition">Contato</a>
-            </div>
-        </div>
-    </header>
 
-    <!-- Hero Section -->
-    <section class="hero-section flex items-center pt-24">
-        <div class="container mx-auto px-4 py-20">
-            <div class="max-w-2xl">
-                <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-                    <span class="text-red-600">EQUIPAMENTO</span> E CONHECIMENTO PARA GUERREIROS MODERNOS
-                </h1>
-                <p class="text-xl md:text-2xl mb-8 text-gray-300">
-                    Produtos técnicos, aulas e conteúdos para todos os níveis
-                </p>
-                <div class="flex flex-wrap gap-4">
-                    <a href="#produtos" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-8 rounded-full transition duration-300 transform hover:scale-105">
-                        Ver Produtos
-                    </a>
-                    <a href="#aulas" class="bg-transparent border-2 border-white hover:border-red-500 hover:text-red-500 text-white font-bold py-3 px-8 rounded-full transition duration-300 transform hover:scale-105">
-                        Explorar Aulas
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
+<body class="scroll-smooth">
 
-    <!-- Seção de Produtos -->
-    <section id="produtos" class="py-20 bg-gray-800">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">NOSSOS <span class="text-red-600">PRODUTOS</span></h2>
-                <div class="w-20 h-1 bg-red-600 mx-auto mb-6"></div>
-                <p class="max-w-2xl mx-auto text-gray-300">
-                    Equipamentos de alta qualidade projetados para atletas sérios. Durabilidade, desempenho e estilo em cada peça.
-                </p>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Produto 1 -->
-                <div class="product-card bg-gray-900 rounded-lg overflow-hidden shadow-lg transition duration-300 animate-fadeInUp" style="animation-delay: 0.1s;">
-                    <div class="relative overflow-hidden h-64">
-                        <img src="https://images.unsplash.com/photo-1586987177718-54e0887fec8e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80" 
-                             alt="Luvas de MMA" 
-                             class="w-full h-full object-cover transition duration-500 hover:scale-110"
-                             loading="lazy">
-                        <span class="absolute top-4 right-4 bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full">NOVO</span>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2">Luvas de MMA Profissionais</h3>
-                        <p class="text-gray-400 mb-4">Proteção premium para sparring e competição</p>
-                        <div class="flex justify-between items-center">
-                            <span class="text-2xl font-bold">R$ 249,90</span>
-                            <a href="#" class="text-red-600 hover:text-red-400 font-medium flex items-center">
-                                Ver Produto <i class="fas fa-arrow-right ml-2"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Produto 2 -->
-                <div class="product-card bg-gray-900 rounded-lg overflow-hidden shadow-lg transition duration-300 animate-fadeInUp" style="animation-delay: 0.2s;">
-                    <div class="relative overflow-hidden h-64">
-                        <img src="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
-                             alt="Rashguard Técnica" 
-                             class="w-full h-full object-cover transition duration-500 hover:scale-110"
-                             loading="lazy">
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2">Rashguard Técnica</h3>
-                        <p class="text-gray-400 mb-4">Compressão e proteção para treinos intensos</p>
-                        <div class="flex justify-between items-center">
-                            <span class="text-2xl font-bold">R$ 179,90</span>
-                            <a href="#" class="text-red-600 hover:text-red-400 font-medium flex items-center">
-                                Ver Produto <i class="fas fa-arrow-right ml-2"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Produto 3 -->
-                <div class="product-card bg-gray-900 rounded-lg overflow-hidden shadow-lg transition duration-300 animate-fadeInUp" style="animation-delay: 0.3s;">
-                    <div class="relative overflow-hidden h-64">
-                        <img src="https://images.unsplash.com/photo-1544463779-1d6b0b2040a7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
-                             alt="Tatami Dobrável" 
-                             class="w-full h-full object-cover transition duration-500 hover:scale-110"
-                             loading="lazy">
-                        <span class="absolute top-4 right-4 bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full">OFERTA</span>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2">Tatami Dobrável Profissional</h3>
-                        <p class="text-gray-400 mb-4">Superfície segura para treinos em qualquer lugar</p>
-                        <div class="flex justify-between items-center">
-                            <span class="text-2xl font-bold">R$ 899,90</span>
-                            <a href="#" class="text-red-600 hover:text-red-400 font-medium flex items-center">
-                                Ver Produto <i class="fas fa-arrow-right ml-2"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="text-center mt-12">
-                <a href="#" class="inline-block bg-transparent border-2 border-red-600 hover:bg-red-600 text-white font-bold py-3 px-8 rounded-full transition duration-300">
-                    Ver Todos os Produtos
-                </a>
-            </div>
-        </div>
-    </section>
+<!-- ============ HEADER ============ -->
+<header id="site-header" class="fixed w-full bg-ink/90 backdrop-blur-sm z-50 transition-all">
+  <div class="belt"></div>
+  <div class="container mx-auto px-6">
+    <div class="flex justify-between items-center py-4">
+      <a href="#home" class="text-2xl font-display text-tatami tracking-wide">Felix<span class="text-crimson">Fight</span></a>
 
-    <!-- Seção de Aulas -->
-    <section id="aulas" class="py-20 bg-gray-900">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">NOSSAS <span class="text-red-600">AULAS</span></h2>
-                <div class="w-20 h-1 bg-red-600 mx-auto mb-6"></div>
-                <p class="max-w-2xl mx-auto text-gray-300">
-                    Treinos especializados ministrados por instrutores experientes. Presencial ou online, para todos os níveis.
-                </p>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Aula 1 -->
-                <div class="bg-gray-800 rounded-lg p-8 text-center hover:bg-gray-700 transition duration-300">
-                    <div class="w-20 h-20 bg-red-600 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <i class="fas fa-hands text-3xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-4">Jiu-Jitsu Brasileiro</h3>
-                    <p class="text-gray-400 mb-6">
-                        Domine a arte suave com técnicas de finalização, posições dominantes e estratégias de competição.
-                    </p>
-                    <a href="#" class="text-red-600 hover:text-red-400 font-medium">Ver Horários →</a>
-                </div>
-                
-                <!-- Aula 2 -->
-                <div class="bg-gray-800 rounded-lg p-8 text-center hover:bg-gray-700 transition duration-300">
-                    <div class="w-20 h-20 bg-red-600 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <i class="fas fa-fist-raised text-3xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-4">Boxe</h3>
-                    <p class="text-gray-400 mb-6">
-                        Desenvolva footwork preciso, combinações eficientes e poder de soco com treinamento científico.
-                    </p>
-                    <a href="#" class="text-red-600 hover:text-red-400 font-medium">Ver Horários →</a>
-                </div>
-                
-                <!-- Aula 3 -->
-                <div class="bg-gray-800 rounded-lg p-8 text-center hover:bg-gray-700 transition duration-300">
-                    <div class="w-20 h-20 bg-red-600 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <i class="fas fa-shoe-prints text-3xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-4">Muay Thai</h3>
-                    <p class="text-gray-400 mb-6">
-                        A arte das oito armas: socos, cotoveladas, joelhadas e chutes para um combate completo.
-                    </p>
-                    <a href="#" class="text-red-600 hover:text-red-400 font-medium">Ver Horários →</a>
-                </div>
-            </div>
-            
-            <div class="mt-12 bg-gray-800 rounded-lg p-8 md:p-12">
-                <div class="flex flex-col md:flex-row items-center">
-                    <div class="md:w-1/2 mb-8 md:mb-0 md:pr-8">
-                        <h3 class="text-2xl font-bold mb-4">AULAS <span class="text-red-600">PARTICULARES</span></h3>
-                        <p class="text-gray-300 mb-6">
-                            Treinamento personalizado com foco em suas necessidades específicas. Ideal para competidores ou quem busca evolução acelerada.
-                        </p>
-                        <ul class="space-y-3">
-                            <li class="flex items-center">
-                                <i class="fas fa-check-circle text-red-600 mr-3"></i>
-                                <span>Planejamento individualizado</span>
-                            </li>
-                            <li class="flex items-center">
-                                <i class="fas fa-check-circle text-red-600 mr-3"></i>
-                                <span>Análise de vídeo e correção técnica</span>
-                            </li>
-                            <li class="flex items-center">
-                                <i class="fas fa-check-circle text-red-600 mr-3"></i>
-                                <span>Preparação física específica</span>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="md:w-1/2">
-                        <div class="bg-gray-900 rounded-lg p-6">
-                            <h4 class="text-xl font-bold mb-4">AGENDE SUA AULA EXPERIMENTAL</h4>
-                            <form>
-                                <div class="mb-4">
-                                    <input type="text" placeholder="Seu Nome" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-red-600">
-                                </div>
-                                <div class="mb-4">
-                                    <input type="email" placeholder="Seu Email" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-red-600">
-                                </div>
-                                <div class="mb-4">
-                                    <select class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-red-600">
-                                        <option value="">Selecione a modalidade</option>
-                                        <option value="jiu-jitsu">Jiu-Jitsu</option>
-                                        <option value="boxe">Boxe</option>
-                                        <option value="muay-thai">Muay Thai</option>
-                                        <option value="personal">Personalizado</option>
-                                    </select>
-                                </div>
-                                <button type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-4 rounded-lg transition duration-300">
-                                    Agendar Aula
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+      <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none" aria-label="Abrir menu" aria-expanded="false">
+        <i class="fas fa-bars text-xl"></i>
+      </button>
 
-    <!-- Seção de Conteúdos -->
-    <section id="conteudos" class="py-20 bg-gray-800">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">CONTEÚDOS <span class="text-red-600">EXCLUSIVOS</span></h2>
-                <div class="w-20 h-1 bg-red-600 mx-auto mb-6"></div>
-                <p class="max-w-2xl mx-auto text-gray-300">
-                    Artigos, vídeos e tutoriais para elevar seu conhecimento e performance nas artes marciais.
-                </p>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Conteúdo 1 -->
-                <div class="bg-gray-900 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition duration-300">
-                    <div class="relative h-48 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1517438476322-5d4f4d8a1c0a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80" 
-                             alt="Como escolher suas luvas" 
-                             class="w-full h-full object-cover transition duration-500 hover:scale-110"
-                             loading="lazy">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
-                        <span class="absolute bottom-4 left-4 bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full">GUIA</span>
-                    </div>
-                    <div class="p-6">
-                        <span class="text-sm text-gray-400">EQUIPAMENTOS</span>
-                        <h3 class="text-xl font-bold my-3">Como Escolher Suas Luvas de Boxe ou MMA</h3>
-                        <p class="text-gray-400 mb-4">
-                            Guia completo sobre tamanhos, pesos, materiais e quando trocar suas luvas para treino e competição.
-                        </p>
-                        <a href="#" class="text-red-600 hover:text-red-400 font-medium flex items-center">
-                            Ler Artigo <i class="fas fa-arrow-right ml-2"></i>
-                        </a>
-                    </div>
-                </div>
-                
-                <!-- Conteúdo 2 -->
-                <div class="bg-gray-900 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition duration-300">
-                    <div class="relative h-48 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1545205597-3d9d398c2152?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
-                             alt="Nutrição para lutadores" 
-                             class="w-full h-full object-cover transition duration-500 hover:scale-110"
-                             loading="lazy">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
-                        <span class="absolute bottom-4 left-4 bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full">NUTRIÇÃO</span>
-                    </div>
-                    <div class="p-6">
-                        <span class="text-sm text-gray-400">DESEMPENHO</span>
-                        <h3 class="text-xl font-bold my-3">Nutrição para Lutadores: Alimentação Pré e Pós-Treino</h3>
-                        <p class="text-gray-400 mb-4">
-                            O que comer antes e depois dos treinos para maximizar energia, recuperação e resultados.
-                        </p>
-                        <a href="#" class="text-red-600 hover:text-red-400 font-medium flex items-center">
-                            Ler Artigo <i class="fas fa-arrow-right ml-2"></i>
-                        </a>
-                    </div>
-                </div>
-                
-                <!-- Conteúdo 3 -->
-                <div class="bg-gray-900 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition duration-300">
-                    <div class="relative h-48 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f5b565f8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
-                             alt="Alongamento para grapplers" 
-                             class="w-full h-full object-cover transition duration-500 hover:scale-110"
-                             loading="lazy">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
-                        <span class="absolute bottom-4 left-4 bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full">TÉCNICA</span>
-                    </div>
-                    <div class="p-6">
-                        <span class="text-sm text-gray-400">MOBILIDADE</span>
-                        <h3 class="text-xl font-bold my-3">Alongamento para Grapplers: Rotina de 10 Minutos</h3>
-                        <p class="text-gray-400 mb-4">
-                            Sequência de alongamentos essenciais para prevenir lesões e melhorar mobilidade no Jiu-Jitsu.
-                        </p>
-                        <a href="#" class="text-red-600 hover:text-red-400 font-medium flex items-center">
-                            Assistir Vídeo <i class="fas fa-arrow-right ml-2"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="text-center mt-12">
-                <a href="#" class="inline-block bg-transparent border-2 border-red-600 hover:bg-red-600 text-white font-bold py-3 px-8 rounded-full transition duration-300">
-                    Ver Todos os Conteúdos
-                </a>
-            </div>
-        </div>
-    </section>
+      <nav class="hidden md:flex items-center space-x-8">
+        <a href="#home" class="nav-link text-sm font-medium text-tatami/70 hover:text-white transition">Início</a>
+        <a href="#sobre" class="nav-link text-sm font-medium text-tatami/70 hover:text-white transition">Sobre</a>
+        <a href="#produtos" class="nav-link text-sm font-medium text-tatami/70 hover:text-white transition">Produtos</a>
+        <a href="#servicos" class="nav-link text-sm font-medium text-tatami/70 hover:text-white transition">Aulas</a>
+        <a href="#contacto" class="bg-crimson hover:bg-red-700 text-white text-sm px-5 py-2.5 rounded-full font-medium transition">Contacto</a>
+      </nav>
+    </div>
 
-    <!-- Seção Sobre -->
-    <section id="sobre" class="about-section py-20">
-        <div class="container mx-auto px-4">
-            <div class="max-w-4xl mx-auto">
-                <div class="text-center mb-16">
-                    <h2 class="text-3xl md:text-4xl font-bold mb-4">SOBRE A <span class="text-red-600">FELIXFIGHT</span></h2>
-                    <div class="w-20 h-1 bg-red-600 mx-auto mb-6"></div>
-                </div>
-                
-                <div class="bg-black/70 backdrop-blur-sm rounded-lg p-8 md:p-12">
-                    <p class="text-lg mb-6">
-                        A <span class="text-red-600 font-bold">FelixFight</span> é uma marca dedicada às artes marciais, com o objetivo de promover o desporto e oferecer produtos de alta qualidade para atletas, praticantes e entusiastas.
-                    </p>
-                    <p class="text-lg mb-6">
-                        Comercializamos equipamentos de treino, vestuário técnico, merchandise exclusivo e oferecemos acesso a aulas especializadas e conteúdos educativos para todos os níveis de experiência.
-                    </p>
-                    <p class="text-lg">
-                        Nossa missão é fornecer ferramentas e conhecimento para que cada praticante possa alcançar seu máximo potencial, seja como hobby, condicionamento físico ou competição profissional.
-                    </p>
-                    
-                    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12">
-                        <div class="text-center">
-                            <div class="text-3xl font-bold text-red-600 mb-2">10+</div>
-                            <div class="text-sm uppercase tracking-wider">Anos no Mercado</div>
-                        </div>
-                        <div class="text-center">
-                            <div class="text-3xl font-bold text-red-600 mb-2">500+</div>
-                            <div class="text-sm uppercase tracking-wider">Produtos</div>
-                        </div>
-                        <div class="text-center">
-                            <div class="text-3xl font-bold text-red-600 mb-2">20+</div>
-                            <div class="text-sm uppercase tracking-wider">Instrutores</div>
-                        </div>
-                        <div class="text-center">
-                            <div class="text-3xl font-bold text-red-600 mb-2">10K+</div>
-                            <div class="text-sm uppercase tracking-wider">Alunos</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <div id="mobile-menu" class="hidden md:hidden pb-5 flex flex-col space-y-1">
+      <a href="#home" class="block py-2 text-tatami/70 hover:text-white">Início</a>
+      <a href="#sobre" class="block py-2 text-tatami/70 hover:text-white">Sobre</a>
+      <a href="#produtos" class="block py-2 text-tatami/70 hover:text-white">Produtos</a>
+      <a href="#servicos" class="block py-2 text-tatami/70 hover:text-white">Aulas</a>
+      <a href="#contacto" class="block py-2 text-crimson font-medium">Contacto</a>
+    </div>
+  </div>
+</header>
 
-    <!-- Seção de Contato -->
-    <section id="contato" class="py-20 bg-gray-900">
-        <div class="container mx-auto px-4">
-            <div class="max-w-4xl mx-auto">
-                <div class="text-center mb-16">
-                    <h2 class="text-3xl md:text-4xl font-bold mb-4">ENTRE EM <span class="text-red-600">CONTATO</span></h2>
-                    <div class="w-20 h-1 bg-red-600 mx-auto mb-6"></div>
-                    <p class="max-w-2xl mx-auto text-gray-300">
-                        Tem dúvidas, sugestões ou quer saber mais sobre nossos produtos e serviços? Envie uma mensagem!
-                    </p>
-                </div>
-                
-                <div class="bg-gray-800 rounded-lg p-8 md:p-12">
-                    <form id="contact-form">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div>
-                                <label for="name" class="block text-sm font-medium mb-2">Seu Nome</label>
-                                <input type="text" id="name" name="name" required 
-                                       class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-red-600">
-                            </div>
-                            <div>
-                                <label for="email" class="block text-sm font-medium mb-2">Seu Email</label>
-                                <input type="email" id="email" name="email" required 
-                                       class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-red-600">
-                            </div>
-                        </div>
-                        <div class="mt-6">
-                            <label for="subject" class="block text-sm font-medium mb-2">Assunto</label>
-                            <input type="text" id="subject" name="subject" required 
-                                   class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-red-600">
-                        </div>
-                        <div class="mt-6">
-                            <label for="message" class="block text-sm font-medium mb-2">Sua Mensagem</label>
-                            <textarea id="message" name="message" rows="5" required 
-                                      class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-red-600"></textarea>
-                        </div>
-                        <div class="mt-8">
-                            <button type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-4 px-6 rounded-lg transition duration-300">
-                                Enviar Mensagem
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- ============ HERO ============ -->
+<section id="home" class="relative h-screen min-h-[640px] flex items-center overflow-hidden">
+  <div class="absolute inset-0 bg-cover bg-center" style="background-image:url('https://images.unsplash.com/photo-1555597673-b21d5c935865?auto=format&fit=crop&w=1600&q=70');"></div>
+  <div class="absolute inset-0 bg-gradient-to-r from-ink via-ink/85 to-ink/40"></div>
 
-    <!-- Newsletter -->
-    <section class="py-16 bg-black">
-        <div class="container mx-auto px-4">
-            <div class="max-w-3xl mx-auto text-center">
-                <h3 class="text-2xl font-bold mb-4">CADASTRE-SE PARA RECEBER NOVIDADES</h3>
-                <p class="text-gray-400 mb-8">
-                    Receba ofertas exclusivas, lançamentos de produtos e conteúdos gratuitos diretamente no seu email.
-                </p>
-                <form class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-                    <input type="email" placeholder="Seu melhor email" 
-                           class="flex-grow bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-red-600">
-                    <button type="submit" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-lg transition duration-300 whitespace-nowrap">
-                        Assinar Newsletter
-                    </button>
-                </form>
-            </div>
-        </div>
-    </section>
+  <div class="tatami-field" aria-hidden="true">
+    <svg viewBox="0 0 800 800">
+      <defs>
+        <pattern id="grid" width="80" height="80" patternUnits="userSpaceOnUse">
+          <rect width="80" height="80" fill="none" stroke="#C9A24B" stroke-opacity=".18"/>
+        </pattern>
+      </defs>
+      <rect width="800" height="800" fill="url(#grid)"/>
+    </svg>
+  </div>
 
-    <!-- Footer -->
-    <footer class="bg-gray-900 pt-16 pb-8">
-        <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
-                <div>
-                    <div class="flex items-center mb-6">
-                        <div class="w-10 h-10 bg-red-600 rounded-full flex items-center justify-center mr-2">
-                            <span class="font-bold text-xl">FF</span>
-                        </div>
-                        <span class="text-xl font-bold tracking-tighter">FELIX<span class="text-red-600">FIGHT</span></span>
-                    </div>
-                    <p class="text-gray-400 mb-4">
-                        Equipamento e conhecimento para guerreiros modernos.
-                    </p>
-                    <div class="flex space-x-4">
-                        <a href="#" class="text-gray-400 hover:text-red-500 transition">
-                            <i class="fab fa-instagram text-xl"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-red-500 transition">
-                            <i class="fab fa-youtube text-xl"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-red-500 transition">
-                            <i class="fab fa-tiktok text-xl"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-red-500 transition">
-                            <i class="fab fa-facebook text-xl"></i>
-                        </a>
-                    </div>
-                </div>
-                
-                <div>
-                    <h4 class="text-lg font-bold mb-6">LINKS RÁPIDOS</h4>
-                    <ul class="space-y-3">
-                        <li><a href="#" class="text-gray-400 hover:text-red-500 transition">Início</a></li>
-                        <li><a href="#produtos" class="text-gray-400 hover:text-red-500 transition">Produtos</a></li>
-                        <li><a href="#aulas" class="text-gray-400 hover:text-red-500 transition">Aulas</a></li>
-                        <li><a href="#conteudos" class="text-gray-400 hover:text-red-500 transition">Conteúdos</a></li>
-                        <li><a href="#sobre" class="text-gray-400 hover:text-red-500 transition">Sobre Nós</a></li>
-                        <li><a href="#contato" class="text-gray-400 hover:text-red-500 transition">Contato</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h4 class="text-lg font-bold mb-6">PRODUTOS</h4>
-                    <ul class="space-y-3">
-                        <li><a href="#" class="text-gray-400 hover:text-red-500 transition">Luvas</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-red-500 transition">Rashguards</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-red-500 transition">Shorts</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-red-500 transition">Tatamis</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-red-500 transition">Acessórios</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-red-500 transition">Merchandise</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h4 class="text-lg font-bold mb-6">CONTATO</h4>
-                    <ul class="space-y-3">
-                        <li class="flex items-start">
-                            <i class="fas fa-map-marker-alt text-red-600 mt-1 mr-3"></i>
-                            <span class="text-gray-400">Rua do Combate, 123<br>São Paulo - SP</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-phone-alt text-red-600 mr-3"></i>
-                            <span class="text-gray-400">(11) 98765-4321</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-envelope text-red-600 mr-3"></i>
-                            <span class="text-gray-400">contato@felixfight.com</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="border-t border-gray-800 pt-8">
-                <div class="flex flex-col md:flex-row justify-between items-center">
-                    <p class="text-gray-500 text-sm mb-4 md:mb-0">
-                        © 2025 FelixFight. Todos os direitos reservados.
-                    </p>
-                    <div class="flex space-x-6">
-                        <a href="#" class="text-gray-500 hover:text-red-500 text-sm transition">Termos de Serviço</a>
-                        <a href="#" class="text-gray-500 hover:text-red-500 text-sm transition">Política de Privacidade</a>
-                        <a href="#" class="text-gray-500 hover:text-red-500 text-sm transition">FAQ</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
+  <div class="relative z-10 container mx-auto px-6">
+    <div class="max-w-xl">
+      <span class="eyebrow strike-in">EQUIPAMENTO · TREINO · DISCIPLINA</span>
+      <h1 class="mt-3 text-6xl md:text-7xl text-tatami leading-[0.92] strike-in d1">
+        TREINA<br><span class="text-crimson">SEM LIMITES</span>
+      </h1>
+      <p class="mt-6 text-lg text-tatami/70 font-light strike-in d2">
+        Produtos e serviços para quem vive as artes marciais — do primeiro treino ao tapete de competição.
+      </p>
+      <div class="mt-9 flex flex-col sm:flex-row gap-4 strike-in d2">
+        <a href="#produtos" class="bg-crimson hover:bg-red-700 px-8 py-3 rounded-full text-white font-medium transition shadow-lg text-center">
+          Ver produtos <i class="fas fa-chevron-right ml-1 text-sm"></i>
+        </a>
+        <a href="#servicos" class="border border-white/25 hover:border-gold hover:text-gold px-8 py-3 rounded-full text-white font-medium transition text-center">
+          Ver aulas
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- Botão Voltar ao Topo -->
-    <button id="back-to-top" class="fixed bottom-8 right-8 bg-red-600 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg opacity-0 invisible transition-all duration-300">
-        <i class="fas fa-arrow-up"></i>
-    </button>
+<div class="belt gold"></div>
 
-    <script>
-        // Menu mobile
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-        
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-        
-        // Validação do formulário de contato
-        const contactForm = document.getElementById('contact-form');
-        
-        if (contactForm) {
-            contactForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                
-                // Validação simples
-                const name = document.getElementById('name').value;
-                const email = document.getElementById('email').value;
-                const subject = document.getElementById('subject').value;
-                const message = document.getElementById('message').value;
-                
-                if (!name || !email || !subject || !message) {
-                    alert('Por favor, preencha todos os campos.');
-                    return;
-                }
-                
-                // Simulação de envio
-                alert('Mensagem enviada com sucesso! Entraremos em contato em breve.');
-                contactForm.reset();
-            });
-        }
-        
-        // Botão voltar ao topo
-        const backToTopButton = document.getElementById('back-to-top');
-        
-        window.addEventListener('scroll', () => {
-            if (window.pageYOffset > 300) {
-                backToTopButton.classList.remove('opacity-0', 'invisible');
-                backToTopButton.classList.add('opacity-100', 'visible');
-            } else {
-                backToTopButton.classList.remove('opacity-100', 'visible');
-                backToTopButton.classList.add('opacity-0', 'invisible');
-            }
-        });
-        
-        backToTopButton.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-        
-        // Suavizar rolagem para links internos
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    // Fechar menu mobile se aberto
-                    if (!mobileMenu.classList.contains('hidden')) {
-                        mobileMenu.classList.add('hidden');
-                    }
-                    
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-        
-        // Animação dos elementos ao rolar
-        const animateOnScroll = () => {
-            const elements = document.querySelectorAll('.animate-fadeInUp');
-            
-            elements.forEach(element => {
-                const elementPosition = element.getBoundingClientRect().top;
-                const screenPosition = window.innerHeight / 1.2;
-                
-                if (elementPosition < screenPosition) {
-                    element.style.opacity = '1';
-                    element.style.transform = 'translateY(0)';
-                }
-            });
-        };
-        
-        window.addEventListener('scroll', animateOnScroll);
-        window.addEventListener('load', animateOnScroll);
-    </script>
+<!-- ============ SOBRE ============ -->
+<section id="sobre" class="py-24 px-6 bg-ink2">
+  <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-14 items-center">
+    <div>
+      <span class="eyebrow">A marca</span>
+      <h2 class="text-4xl mt-3 mb-6 text-tatami">Feito para quem <span class="text-crimson">treina a sério</span></h2>
+      <p class="text-tatami/70 mb-5 leading-relaxed">
+        A FelixFight nasceu para servir a comunidade de artes marciais — de quem dá o primeiro soco no boxe a quem já compete em MMA ou BJJ. Equipamento testado, aulas orientadas por quem sabe, e uma comunidade que respeita a disciplina do tapete.
+      </p>
+      <ul class="space-y-3 text-tatami/70 mt-6">
+        <li class="flex items-center gap-3"><i class="fas fa-check-circle text-gold"></i> Produtos escolhidos por praticantes</li>
+        <li class="flex items-center gap-3"><i class="fas fa-check-circle text-gold"></i> Instrutores certificados</li>
+        <li class="flex items-center gap-3"><i class="fas fa-check-circle text-gold"></i> Comunidade ativa dentro e fora do tapete</li>
+      </ul>
+    </div>
+    <div class="rounded-2xl overflow-hidden shadow-2xl border border-white/5">
+      <img src="https://images.unsplash.com/photo-1517438322307-e67111335449?auto=format&fit=crop&w=1000&q=75" alt="Treino de artes marciais" class="w-full h-auto object-cover">
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRODUTOS ============ -->
+<section id="produtos" class="py-24 px-6">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center max-w-2xl mx-auto mb-16">
+      <span class="eyebrow">Loja</span>
+      <h2 class="text-4xl mt-3 mb-4 text-tatami">Equipamento de treino</h2>
+      <p class="text-tatami/60">Kimonos, luvas, proteções e acessórios — em preparação.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="soon-card rounded-2xl p-8 card-hover">
+        <div class="w-12 h-12 rounded-xl bg-crimson/15 flex items-center justify-center mb-5"><i class="fas fa-mitten text-crimson text-xl"></i></div>
+        <h3 class="text-xl mb-2 text-tatami">Luvas &amp; Proteções</h3>
+        <p class="text-sm text-tatami/60 leading-relaxed">Luvas de boxe, MMA e proteções para treino seguro a qualquer nível.</p>
+      </div>
+      <div class="soon-card rounded-2xl p-8 card-hover">
+        <div class="w-12 h-12 rounded-xl bg-crimson/15 flex items-center justify-center mb-5"><i class="fas fa-tshirt text-crimson text-xl"></i></div>
+        <h3 class="text-xl mb-2 text-tatami">Kimonos &amp; Fatos</h3>
+        <p class="text-sm text-tatami/60 leading-relaxed">Kimonos de Judo e BJJ, faixas e vestuário técnico de treino.</p>
+      </div>
+      <div class="soon-card rounded-2xl p-8 card-hover">
+        <div class="w-12 h-12 rounded-xl bg-crimson/15 flex items-center justify-center mb-5"><i class="fas fa-dumbbell text-crimson text-xl"></i></div>
+        <h3 class="text-xl mb-2 text-tatami">Acessórios de Treino</h3>
+        <p class="text-sm text-tatami/60 leading-relaxed">Sacos de pancada, cordas, protetores bucais e mais.</p>
+      </div>
+    </div>
+
+    <div class="text-center mt-12">
+      <span class="inline-block soon-card rounded-full px-6 py-2 text-gold text-sm font-medium">Loja a abrir em breve</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SERVIÇOS / AULAS ============ -->
+<section id="servicos" class="py-24 px-6 bg-ink2">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center max-w-2xl mx-auto mb-16">
+      <span class="eyebrow">Aulas &amp; Treino</span>
+      <h2 class="text-4xl mt-3 mb-4 text-tatami">Serviços</h2>
+      <p class="text-tatami/60">Da iniciação à competição, com acompanhamento real.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="rounded-2xl p-8 border border-white/10 card-hover">
+        <div class="w-12 h-12 rounded-xl bg-gold/15 flex items-center justify-center mb-5"><i class="fas fa-user-graduate text-gold text-xl"></i></div>
+        <h3 class="text-xl mb-2 text-tatami">Iniciação</h3>
+        <p class="text-sm text-tatami/60 leading-relaxed">Aulas para quem nunca treinou — técnica, postura e confiança desde o dia um.</p>
+      </div>
+      <div class="rounded-2xl p-8 border border-white/10 card-hover">
+        <div class="w-12 h-12 rounded-xl bg-gold/15 flex items-center justify-center mb-5"><i class="fas fa-people-arrows text-gold text-xl"></i></div>
+        <h3 class="text-xl mb-2 text-tatami">Treino Personalizado</h3>
+        <p class="text-sm text-tatami/60 leading-relaxed">Sessões individuais com foco nos teus objetivos e ritmo.</p>
+      </div>
+      <div class="rounded-2xl p-8 border border-white/10 card-hover">
+        <div class="w-12 h-12 rounded-xl bg-gold/15 flex items-center justify-center mb-5"><i class="fas fa-trophy text-gold text-xl"></i></div>
+        <h3 class="text-xl mb-2 text-tatami">Preparação para Competição</h3>
+        <p class="text-sm text-tatami/60 leading-relaxed">Planos de treino intensivo para atletas a preparar competições.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACTO ============ -->
+<section id="contacto" class="py-24 px-6">
+  <div class="max-w-xl mx-auto">
+    <div class="text-center mb-10">
+      <span class="eyebrow">Contacto</span>
+      <h2 class="text-4xl mt-3 text-tatami">Entra no tapete</h2>
+    </div>
+    <form id="contact-form" class="grid gap-4">
+      <input id="nome" type="text" placeholder="Nome" required class="p-3.5 rounded-lg bg-ink2 border border-white/10 text-white placeholder-tatami/40 focus:outline-none focus:border-crimson transition">
+      <input id="email" type="email" placeholder="Email" required class="p-3.5 rounded-lg bg-ink2 border border-white/10 text-white placeholder-tatami/40 focus:outline-none focus:border-crimson transition">
+      <textarea id="mensagem" placeholder="Mensagem" rows="4" required class="p-3.5 rounded-lg bg-ink2 border border-white/10 text-white placeholder-tatami/40 focus:outline-none focus:border-crimson transition"></textarea>
+      <button type="submit" class="bg-crimson hover:bg-red-700 px-6 py-3 rounded-full text-white font-medium transition">Enviar mensagem</button>
+      <p id="form-status" class="text-sm text-tatami/60 hidden text-center">A abrir o teu cliente de email...</p>
+    </form>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="bg-ink py-8 text-center text-tatami/50 text-sm border-t border-white/5">
+  <div class="belt gold mb-6 max-w-xs mx-auto rounded-full overflow-hidden"></div>
+  <p>© 2026 FelixFight. Todos os direitos reservados.</p>
+</footer>
+
+<!-- ============ WHATSAPP FLUTUANTE ============ -->
+<!-- ⚠ Substituir XXXXXXXXX pelo número real antes de publicar -->
+<a href="https://wa.me/351XXXXXXXXX" target="_blank" rel="noopener"
+   class="fixed bottom-6 right-6 bg-green-500 p-4 rounded-full shadow-lg hover:bg-green-600 transition group z-40">
+  <i class="fab fa-whatsapp text-white text-2xl"></i>
+  <span class="absolute right-full mr-3 top-1/2 -translate-y-1/2 px-3 py-1.5 bg-green-500 rounded text-xs text-white opacity-0 group-hover:opacity-100 transition whitespace-nowrap pointer-events-none">
+    Fala connosco
+  </span>
+</a>
+
+<script>
+(function () {
+  const menuBtn = document.getElementById('mobile-menu-button');
+  const menu = document.getElementById('mobile-menu');
+  menuBtn.addEventListener('click', () => {
+    const isHidden = menu.classList.toggle('hidden');
+    menuBtn.setAttribute('aria-expanded', String(!isHidden));
+  });
+
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const id = a.getAttribute('href');
+      const target = document.querySelector(id);
+      if (!target) return;
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth' });
+      menu.classList.add('hidden');
+    });
+  });
+
+  const header = document.getElementById('site-header');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('shadow-lg', window.scrollY > 20);
+  });
+
+  const form = document.getElementById('contact-form');
+  const status = document.getElementById('form-status');
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const nome = document.getElementById('nome').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const mensagem = document.getElementById('mensagem').value.trim();
+    const subject = encodeURIComponent(`Contacto via site — ${nome}`);
+    const body = encodeURIComponent(`Nome: ${nome}\nEmail: ${email}\n\n${mensagem}`);
+    window.location.href = `mailto:henriquebrazwork@hotmail.com?subject=${subject}&body=${body}`;
+    status.classList.remove('hidden');
+  });
+})();
+</script>
+
 </body>
 </html>
